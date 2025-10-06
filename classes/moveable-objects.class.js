@@ -12,12 +12,12 @@ class moveableObjects {
     }
 
     moveRight() {
-    this.x += 10;
+    this.position_x += 10;
     console.log("character moves right");
     }
 
     moveLeft() {
-        this.x -= 10;
+        this.position_x -= 10;
         console.log("character moves left");
     }
 }
