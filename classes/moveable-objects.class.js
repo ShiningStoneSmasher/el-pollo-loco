@@ -3,7 +3,6 @@ class moveableObjects {
   position_y;
   height;
   width;
-  speed;
   img;
   imageCache = {};
   currentImage = 0;
@@ -22,16 +21,14 @@ class moveableObjects {
   }
 
   moveRight() {
-    this.position_x += 10;
+    this.position_x += this.speed;
   }
 
   moveLeft() {
-    setInterval(() => {
-      this.position_x -= this.speed;
-    }, 1000 / 60);
+    this.position_x -= this.speed;
   }
   jump() {
-    this.y -= 10;
+    this.position_y -= 10;
     console.log("character jumps");
   }
 }
