@@ -6,6 +6,7 @@ class moveableObjects {
   img;
   imageCache = {};
   currentImage = 0;
+  otherDirection = false;
 
   loadImages(arr) {
     arr.forEach((path) => {

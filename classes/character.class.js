@@ -1,7 +1,7 @@
 class Character extends moveableObjects {
   position_x = 100;
-  position_y = 480 - 150;
-  height = 150;
+  position_y = 480 - 230;
+  height = 180;
   width = 100;
   speed = 6;
   world;
@@ -24,19 +24,29 @@ class Character extends moveableObjects {
   }
   animate(keyboard) {
     setInterval(() => {
-      if (keyboard.RIGHT) {
-        this.moveRight();
+      if (keyboard.RIGHT && this.position_x < 1420 + 720 - this.width) {
+        this.otherDirection = false;
+        this.moveRight();        
       }
-      if (keyboard.LEFT) {
+      if (keyboard.LEFT && this.position_x > 0) {        
+        this.otherDirection = true;
         this.moveLeft();
       }
       if (keyboard.UP) {
         this.jump();
       }
+      this.world.camera_x = -this.position_x + this.width;
+      if (this.world.camera_x > 0) {
+        this.world.camera_x = 0;        
+      }
+      if (this.position_x >= 1420 + this.width) {
+        this.world.camera_x = -1420;
+      }
     }, 1000 / 60);
 
+
     setInterval(() => {
-      if (keyboard.RIGHT) {
+      if (keyboard.RIGHT || keyboard.LEFT) {
         let i = this.currentImage % this.IMAGES_WALKING.length; // 0...5
         let path = this.IMAGES_WALKING[i];
         this.img = this.imageCache[path];

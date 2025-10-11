@@ -1,8 +1,8 @@
 class Chicken extends moveableObjects {
   position_x = 200 + Math.random() * 500;
-  position_y = 480 - 100;
-  height = 100;
-  width = 100;
+  position_y = 480 - 130;
+  height = 80;
+  width = 80;
   speed = 1 + Math.random();
   IMAGES_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
