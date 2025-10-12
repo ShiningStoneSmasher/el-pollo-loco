@@ -1,6 +1,6 @@
 class Character extends moveableObjects {
   position_x = 100;
-  position_y = 480 - 230;
+  position_y = 480 - 230 - 200;
   height = 180;
   width = 100;
   speed = 6;
@@ -21,6 +21,7 @@ class Character extends moveableObjects {
     this.loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);
     this.animate(this.world.keyboard);
+    this.applyGravity();
   }
   animate(keyboard) {
     setInterval(() => {

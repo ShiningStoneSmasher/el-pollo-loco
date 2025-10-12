@@ -12,10 +12,12 @@ class Chicken extends moveableObjects {
   deadChicken = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
 
   chickenIsDead = false;
+  chicken_id;
 
   constructor(world, id) {
     super();
     this.world = world;
+    this.chicken_id = id;
     this.loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.animate();
@@ -28,15 +30,15 @@ class Chicken extends moveableObjects {
 
 
     this.intervalId = setInterval(() => {
-      let index = this.currentImage % this.IMAGES_WALKING.length;
-      let path = this.IMAGES_WALKING[index];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+
+      this.animateObjects(this.IMAGES_WALKING);
+
+
       if (this.position_x < -this.width) {
         console.log("chicken is out of the screen");
-        
         clearInterval(this.intervalId);
       }
+
     }, 1000 / 10);
   }
 }
