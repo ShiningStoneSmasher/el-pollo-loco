@@ -13,10 +13,10 @@ class Character extends moveableObjects {
     super();
     this.world = world;
     this.loadImage("img/2_character_pepe/2_walk/W-21.png");
-    this.loadImages(images.IMAGES_WALKING);
-    this.loadImages(images.IMAGES_JUMPING);
-    this.loadImages(images.IMAGES_IDLE);
-    this.loadImages(images.IMAGES_IDLE_LONG);
+    this.loadImages(imagesPepe.IMAGES_WALKING);
+    this.loadImages(imagesPepe.IMAGES_JUMPING);
+    this.loadImages(imagesPepe.IMAGES_IDLE);
+    this.loadImages(imagesPepe.IMAGES_IDLE_LONG);
     this.animate(this.world.keyboard);
     this.applyGravity();
     this.world.keyboard.startTimer();
@@ -46,18 +46,18 @@ class Character extends moveableObjects {
 
     setInterval(() => {      
       if (this.isAboveGround()) {
-        this.animateObjects(images.IMAGES_JUMPING);
+        this.animateObjects(imagesPepe.IMAGES_JUMPING);
         return;
       }
       if (keyboard.RIGHT || keyboard.LEFT) {
-        this.animateObjects(images.IMAGES_WALKING);
+        this.animateObjects(imagesPepe.IMAGES_WALKING);
         return;
       }
       if (keyboard.timerFinished) {
-        this.animateObjects(images.IMAGES_IDLE_LONG);
+        this.animateObjects(imagesPepe.IMAGES_IDLE_LONG);
         return;
       }
-      this.animateObjects(images.IMAGES_IDLE);
+      this.animateObjects(imagesPepe.IMAGES_IDLE);
     }, 1000 / 10);
   }
 }
