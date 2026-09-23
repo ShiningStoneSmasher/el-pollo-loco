@@ -8,6 +8,7 @@ function init() {
 }
 
 window.addEventListener("keydown", (e) => {
+    keyboard.startTimer();
     switch (e.key) {
         case "ArrowLeft":
             keyboard.LEFT = true;            

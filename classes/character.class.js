@@ -5,23 +5,21 @@ class Character extends moveableObjects {
   width = 100;
   speed = 6;
   world;
-  IMAGES_WALKING = [
-    "img/2_character_pepe/2_walk/W-21.png",
-    "img/2_character_pepe/2_walk/W-22.png",
-    "img/2_character_pepe/2_walk/W-23.png",
-    "img/2_character_pepe/2_walk/W-24.png",
-    "img/2_character_pepe/2_walk/W-25.png",
-    "img/2_character_pepe/2_walk/W-26.png",
-  ];
+
+  
   currentImage = 0;
 
   constructor(world) {
     super();
     this.world = world;
     this.loadImage("img/2_character_pepe/2_walk/W-21.png");
-    this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(images.IMAGES_WALKING);
+    this.loadImages(images.IMAGES_JUMPING);
+    this.loadImages(images.IMAGES_IDLE);
+    this.loadImages(images.IMAGES_IDLE_LONG);
     this.animate(this.world.keyboard);
     this.applyGravity();
+    this.world.keyboard.startTimer();
   }
   animate(keyboard) {
     setInterval(() => {
@@ -33,7 +31,7 @@ class Character extends moveableObjects {
         this.otherDirection = true;
         this.moveLeft();
       }
-      if (keyboard.UP) {
+      if (keyboard.UP && !this.isAboveGround()) {
         this.jump();
       }
       this.world.camera_x = -this.position_x + this.width;
@@ -46,13 +44,20 @@ class Character extends moveableObjects {
     }, 1000 / 60);
 
 
-    setInterval(() => {
-      if (keyboard.RIGHT || keyboard.LEFT) {
-        let i = this.currentImage % this.IMAGES_WALKING.length; // 0...5
-        let path = this.IMAGES_WALKING[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+    setInterval(() => {      
+      if (this.isAboveGround()) {
+        this.animateObjects(images.IMAGES_JUMPING);
+        return;
       }
+      if (keyboard.RIGHT || keyboard.LEFT) {
+        this.animateObjects(images.IMAGES_WALKING);
+        return;
+      }
+      if (keyboard.timerFinished) {
+        this.animateObjects(images.IMAGES_IDLE_LONG);
+        return;
+      }
+      this.animateObjects(images.IMAGES_IDLE);
     }, 1000 / 10);
   }
 }

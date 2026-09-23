@@ -13,14 +13,13 @@ class moveableObjects {
 
   applyGravity() {
     setInterval(() => {
-      if (this.isAboveGround()) {
+      if (this.isAboveGround() || this.speedY > 0) {
       this.speedY -= this.acceleration;
       this.position_y -= this.speedY;
       if (this.position_y > 250){
         this.position_y = 250;
       }
     }
-    console.log(this.position_y);
     
     }, 1000 / 60);
   }
@@ -49,8 +48,8 @@ class moveableObjects {
     this.position_x -= this.speed;
   }
   jump() {
+    this.speedY = 15;
     this.position_y -= 10;
-    console.log("character jumps");
   }
   animateObjects(images) {
     let index = this.currentImage % images.length;
